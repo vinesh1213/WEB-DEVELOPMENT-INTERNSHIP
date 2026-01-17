@@ -1,15 +1,30 @@
 /* ========== GLOBAL STYLES ==========
    These styles apply to the entire HTML document and set defaults for all elements.
 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    margin: 0;       /* Removes default browser margin */
-    padding: 0;      /* Removes default browser padding */
+    font-family: 'Inter', 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    min-height: 100vh;
+    padding: 20px;
+    margin: 0;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* ========== PROFILE CARD CONTAINER ==========
-   This demonstrates the complete CSS Box Model concept:
+   This demonstrates the complete CSS Box Model concept with advanced styling:
    
    BOX MODEL STRUCTURE (from inside out):
    1. Content: The actual text and elements inside
@@ -18,61 +33,218 @@ body {
    4. Margin: Outer space between this element and other elements (creates space outside)
 */
 .profile-card {
-    width: 400px;
-    background-color: #ffffff;
-    margin: 40px auto;          /* MARGIN: 40px top/bottom, auto left/right (centers the card) */
-    padding: 20px;              /* PADDING: 20px on all sides (space inside the card) */
-    border: 2px solid #333;     /* BORDER: 2px solid dark gray (defines the card's edge) */
-    box-sizing: border-box;     /* Ensures padding and border are included in width calculation */
+    width: 100%;
+    max-width: 500px;
+    background: linear-gradient(145deg, #ffffff, #f8f9ff);
+    margin: 40px auto;
+    padding: 40px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(102, 126, 234, 0.1);
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(240, 147, 251, 0.1) 0%, transparent 70%);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, -30px); }
+}
+
+.profile-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35), 0 0 60px rgba(79, 172, 254, 0.2);
 }
 
 /* ========== NAME STYLING ==========
-   Styles for the profile name heading.
+   Styles for the profile name heading with premium fonts.
 */
 .name {
-    margin-bottom: 5px;         /* Space below the name (margin pushes elements apart) */
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8em;
+    font-weight: 700;
+    margin-bottom: 5px;
     text-align: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+    text-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
 }
 
 /* ========== ROLE TEXT ==========
-   Styles for the role/position text.
+   Styles for the role/position text with gradient effects.
 */
 .role {
+    font-family: 'Poppins', sans-serif;
     text-align: center;
-    color: #666;
-    margin-bottom: 20px;        /* Creates separation between header and first section */
+    font-size: 1.1em;
+    color: #764ba2;
+    margin-bottom: 25px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Divider line */
+.profile-card::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #f093fb, #00f2fe);
+    margin: 15px auto 25px;
+    border-radius: 2px;
 }
 
 /* ========== SECTION STYLING ==========
-   Each section (About Me, Skills, Contact) demonstrates padding and margin:
+   Each section demonstrates padding and margin with vibrant colors:
    - PADDING creates internal space, pushing content away from the border
    - MARGIN creates external space, separating this section from other elements
 */
 .section {
-    margin-top: 20px;           /* MARGIN: Space above each section (separates from other sections) */
-    padding: 15px;              /* PADDING: Space inside section (between border and content) */
-    border: 1px solid #ccc;     /* BORDER: Light gray border to define the section boundary */
-    background-color: #fafafa;
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #4facfe, #00f2fe);
+    background-size: 200% 100%;
+    animation: slideGradient 3s ease infinite;
+}
+
+@keyframes slideGradient {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+}
+
+.section:hover {
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+    transform: translateX(5px);
+    border-color: rgba(102, 126, 234, 0.2);
+}
+
+/* Individual section colors */
+.section:nth-child(2) {
+    background: linear-gradient(135deg, #fff5f7 0%, #ffe0ec 100%);
+}
+
+.section:nth-child(3) {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+
+.section:nth-child(4) {
+    background: linear-gradient(135deg, #f5f9ff 0%, #f0e6ff 100%);
 }
 
 /* ========== SECTION HEADINGS ==========
    Styles for h2 elements within sections.
 */
 .section h2 {
-    margin-bottom: 10px;        /* Space below the heading (within the section) */
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-top: 5px;
+}
+
+/* ========== SECTION PARAGRAPHS ==========
+   Styles for paragraph text.
+*/
+.section p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1em;
+    line-height: 1.8;
     color: #333;
+    margin-bottom: 10px;
+    font-weight: 300;
 }
 
 /* ========== LIST STYLING ==========
-   Styles for unordered lists - demonstrates padding on list containers.
+   Styles for unordered lists with advanced styling.
 */
 ul {
-    padding-left: 20px;         /* PADDING: Indentation from the left (space inside the list) */
+    padding-left: 25px;
+    list-style: none;
 }
 
 /* ========== LIST ITEM STYLING ==========
-   Styles for individual list items.
+   Styles for individual list items with custom bullets.
 */
 li {
-    margin-bottom: 5px;         /* MARGIN: Space between list items (separates items from each other) */
+    margin-bottom: 12px;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    font-weight: 400;
+    position: relative;
+    padding-left: 20px;
+    transition: all 0.3s ease;
+}
+
+li::before {
+    content: '✨';
+    position: absolute;
+    left: 0;
+    color: #f093fb;
+    font-size: 1.2em;
+}
+
+li:hover {
+    color: #667eea;
+    padding-left: 25px;
+}
+
+/* ========== RESPONSIVE DESIGN ==========
+   Mobile-friendly adjustments
+*/
+@media (max-width: 768px) {
+    .profile-card {
+        padding: 30px 20px;
+        max-width: 90%;
+    }
+
+    .name {
+        font-size: 2.2em;
+    }
+
+    .section {
+        padding: 15px;
+    }
+
+    .section h2 {
+        font-size: 1.3em;
+    }
 }
